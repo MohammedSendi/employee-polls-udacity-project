@@ -1,17 +1,26 @@
 import {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {handleInitialData} from '../actions/shared'
+import Home from './Home'
+import Question from './Question'
 
 const App = (props) => {
 
   useEffect (() => {
     props.dispatch(handleInitialData());
   }, [])
+
   return (
-    <div>
-      Test
-    </div>
-  );
+  <div>
+    {props.loading === true? "loading" : <Home/>}
+  </div>
+);
 }
 
-export default connect()(App);
+const mapStateToProps = ({authedUser}) => (
+  {
+    loading: authedUser === null,
+  }
+)
+
+export default connect(mapStateToProps)(App);

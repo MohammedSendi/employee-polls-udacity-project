@@ -7,7 +7,7 @@ const temp_auth = "mtsamis"
 
 export function handleInitialData() {
     return (dispatch) => {
-        return getInitialData().then((users, questions) => {
+        return getInitialData().then(({users, questions}) => {
             dispatch(receiveUsers(users));
             dispatch(receiveQuestions(questions));
             dispatch(setAuthedUser(temp_auth))

@@ -19,11 +19,27 @@ function saveQuestion(question){
     }
 }
 
+function saveAnswer(answer){
+    return {
+        type: SAVE_ANSWER,
+        answer
+    }
+}
+
 export function handleSaveQuestion(question){
     return (dispatch) => {
         dispatch(showLoading());
         return _saveQuestion(question)
         .then((question) => dispatch(saveQuestion(question)))
-        .then(() => dispatch(hideLoading))
+        .then(() => dispatch(hideLoading()))
+    }
+}
+
+export function handleSaveAnswer(answer){
+    return (dispatch) => {
+        dispatch(showLoading());
+        return _saveQuestionAnswer(answer)
+        .then(dispatch(saveAnswer(answer)))
+        .then(() => dispatch(hideLoading()))
     }
 }

@@ -9,3 +9,12 @@ export function getInitialData () {
         questions,
     }))
 }
+
+export function checkUserCredenrials(user, password){
+    return Promise.all([_getUsers()])
+    .then((users) => {
+        if(users[user] && users[user].password === password){
+            return users[user]
+        }
+    })
+}

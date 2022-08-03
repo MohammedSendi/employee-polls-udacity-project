@@ -7,6 +7,7 @@ import Question from './Question'
 import LoadingBar from 'react-redux-loading-bar'
 import Leaderboard from './Leaderboard'
 import QuesionPage from './QuesionPage'
+import Login from './Login'
 const App = (props) => {
 
   useEffect (() => {
@@ -16,14 +17,14 @@ const App = (props) => {
   return (
   <div>
     <LoadingBar/>
-    {props.loading === true? "loading" : <QuesionPage id={"6ni6ok3ym7mf1p33lnez"}/>}
+    {props.logged === true? <Login/> : <Home/>}
   </div>
 );
 }
 
 const mapStateToProps = ({authedUser}) => (
   {
-    loading: authedUser === null,
+    logged: authedUser === null,
   }
 )
 

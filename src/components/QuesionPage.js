@@ -1,19 +1,31 @@
 import { connect } from "react-redux";
 import {handleSaveAnswer} from '../actions/questions'
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+const withRouter = (Component) => {
+  const ComponentWithRouterProp = (props) => {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  };
+
+  return ComponentWithRouterProp;
+}
 
 const QuestionPage = (props) => {
 
     const handleClick = (event) => {
         //dispatch answer
-        console.log(props.question.id)
         const answer = { 
             authedUser: props.authedUser,
-            qid: props.question.id,
+            qid: props.id,
             answer: event.target.value
         }
         props.dispatch(handleSaveAnswer(answer))
         
         //return to home
+        props.navigate("/")
     }
 
     return (
@@ -32,14 +44,17 @@ const QuestionPage = (props) => {
     )
 }
 
-const mapStateToProps = ({authedUser, users, questions}, {id}) => {
-     const question = questions[id];
-     
-     return {
+const mapStateToProps = ({authedUser, users, questions}, props) => {
+    const { id } = props.router.params;
+    const question = questions[id];
+
+    return {
         authedUser,
         question,
         author: users[question.author].name,
-     }
+        id,
+        ...props.router
+    }
 }
 
-export default connect(mapStateToProps)(QuestionPage)
+export default withRouter(connect(mapStateToProps)(QuestionPage))

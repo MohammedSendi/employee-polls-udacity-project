@@ -3,8 +3,11 @@ import {useState} from 'react'
 import {formatQuestion} from '../utils/_DATA'
 import { handleSaveQuestion } from "../actions/questions";
 import questions from "../reducers/questions";
+import {useNavigate} from 'react-router-dom'
 
 const NewQuestion = (props) => {
+
+    const navigate = useNavigate()
 
     const [optionOne, setOptionOne] = useState("")
     const [optionTwo, setOptionTwo] = useState("")
@@ -23,9 +26,10 @@ const NewQuestion = (props) => {
             author: props.authedUser
         }
         props.dispatch(handleSaveQuestion(newQuestion))
-        setOptionOne("")
-        setOptionTwo("")
+
+        navigate("/")
         //TODO - return to home page
+
     }
 
     return (

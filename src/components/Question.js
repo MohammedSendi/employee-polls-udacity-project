@@ -1,13 +1,20 @@
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helper";
+import {useNavigate, Link} from 'react-router-dom'
 
 const Question = (props) => {
-    console.log(props)
+
+    const navigate = useNavigate()
+
+    const handleClick = (event) => {
+        const id = event.target.value
+        navigate("QuesionPage/" + id)
+    }
     return (
         <div>
             <h1>{props.author}</h1>
             <p>{formatDate(props.question.timestamp)}</p>
-            <button>Show</button>
+            <Link to={`/poll/${props.question.id}`}><button>Show</button> </Link>
         </div>
     )
 }

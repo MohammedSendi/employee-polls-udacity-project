@@ -5,6 +5,7 @@ import Home from './Home'
 import NewQuestion from './NewQuestion'
 import Question from './Question'
 import LoadingBar from 'react-redux-loading-bar'
+import Leaderboard from './Leaderboard'
 const App = (props) => {
 
   useEffect (() => {
@@ -14,7 +15,7 @@ const App = (props) => {
   return (
   <div>
     <LoadingBar/>
-    {props.loading === true? "loading" : <Home/>}
+    {props.loading === true? "loading" : <Leaderboard/>}
   </div>
 );
 }

@@ -4,7 +4,6 @@ import {formatQuestion} from '../utils/_DATA'
 import { handleSaveQuestion } from "../actions/questions";
 import questions from "../reducers/questions";
 import {useNavigate} from 'react-router-dom'
-
 const NewQuestion = (props) => {
 
     const navigate = useNavigate()
@@ -26,7 +25,6 @@ const NewQuestion = (props) => {
             author: props.authedUser
         }
         props.dispatch(handleSaveQuestion(newQuestion))
-
         navigate("/")
         //TODO - return to home page
 

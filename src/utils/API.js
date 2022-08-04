@@ -10,11 +10,23 @@ export function getInitialData () {
     }))
 }
 
-export function checkUserCredenrials(user, password){
-    return Promise.all([_getUsers()])
-    .then((users) => {
-        if(users[user] && users[user].password === password){
-            return users[user]
-        }
-    })
+export function checkUserCredenrials(username, password){
+    return new Promise((resolve, reject) =>
+        setTimeout(() => {
+            _getUsers().then(users => {
+                if (Object.keys(users).includes(username)) {
+                    const user = users[username];
+    
+                    if (user.password !== password) {
+                        reject(alert('Wrong password.'));
+                    }
+    
+                    return resolve(user);
+                }
+    
+                return reject(alert('User not found.'));
+            })
+            
+        }, 500)
+    );
 }

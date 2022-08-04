@@ -6,6 +6,7 @@ const Login = (props) => {
 
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
+    const submitEnabled = props.loading || user === "" || pass === ""
 
     const handleTextChange = (event) => {
         event.preventDefault()
@@ -25,17 +26,17 @@ const Login = (props) => {
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
             <input name="user" type={'text'} placeholder="User" onChange={handleTextChange}/>
-            <input name="password" type={'text'} placeholder="Password" onChange={handleTextChange}/>
-            <button type="submit">Submit</button>
+            <input name="password" type={'password'} placeholder="Password" onChange={handleTextChange}/>
+            <button type="submit" disabled={submitEnabled}>Submit</button>
         </form>
     </div>
     )
 }
 
-const mapStateToProps = ({authedUser, users}) => {
+const mapStateToProps = ({loadingBar}) => {
      
      return {
-        authedUser,
+        loading: loadingBar.default === 1,
      }
 }
 

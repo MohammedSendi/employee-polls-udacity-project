@@ -1,18 +1,40 @@
 import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 
 const Leaderboard = (props) => {
-    console.log(props)
+
+    const [userScore, setUserScore] = useState([])
+
+    useEffect(() => {
+        setUserScore([])
+        Object.keys(props.users).forEach(user => {
+            let answers = Object.keys(props.users[user].answers).length
+            let questions = props.users[user].questions.length
+            let total = answers + questions
+
+            setUserScore((userScore) => Object.values({
+                ...userScore,
+                [user]: {
+                    ...props.users[user],
+                    total 
+                }
+            }).sort((a, b) => b.total - a.total))
+        })
+    }, [])
+    
+
+    console.log(userScore)
     return (
         <div>
             <h1>Leaderboard</h1>
             <ul>
             {
-                Object.keys(props.users).map(id => (
-                    <li key={id}>
+                userScore.map(user => (
+                    <li key={user.id}>
                         <div>
-                            <p>{props.users[id].name}</p>
-                            <p>answered {Object.keys(props.users[id].answers).length}</p>
-                            <p>created {props.users[id].questions.length}</p>
+                            <p>{user.name}</p>
+                            <p>answered {Object.keys(user.answers).length}</p>
+                            <p>created {user.questions.length}</p>
                         </div>
                     </li>
                 ))

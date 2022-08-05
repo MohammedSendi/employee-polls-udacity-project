@@ -2,6 +2,13 @@ import {checkUserCredenrials} from '../utils/API'
 import {showLoading, hideLoading} from "react-redux-loading-bar"
 
 export const SET_AUTHED_USER = "SET_AUTHED_USER"
+export const LOGOUT_USER = "LOGOUT_USER"
+
+export function logoutUser(){
+    return {
+        type: LOGOUT_USER
+    }
+}
 
 function setAuthedUser(id) {
     return {

@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authedUser";
 
-const Nav = () => {
+const Nav = (props) => {
+
+    const handleLogout = () => {
+        props.dispatch(logoutUser())
+    }
+
     return (
         <nav>
             <ul>
@@ -8,8 +15,15 @@ const Nav = () => {
                 <li><Link to="/leaderboard">Leaderboard</Link></li>
                 <li><Link to="/new">New</Link></li>
             </ul>
+            <button onClick={handleLogout}>logout</button>
         </nav>
     )
 }
 
-export default Nav
+const mapStateToProps = ({authedUser}) => {
+    
+    return {
+        authedUser,
+    }
+}
+export default connect(mapStateToProps)(Nav)

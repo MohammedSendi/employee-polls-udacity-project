@@ -15,6 +15,7 @@ const Nav = (props) => {
                 <li><Link to="/leaderboard">Leaderboard</Link></li>
                 <li><Link to="/new">New</Link></li>
             </ul>
+            <h4>{props.authedUser}</h4>
             <button onClick={handleLogout}>logout</button>
         </nav>
     )

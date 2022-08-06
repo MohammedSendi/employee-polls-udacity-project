@@ -17,8 +17,6 @@ const Login = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         props.dispatch(handleLogin(user, pass))
-        //setUser("")
-        //setPass("")
     }
 
     return (

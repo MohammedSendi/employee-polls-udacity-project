@@ -18,7 +18,6 @@ export function addQuestion(id, question){
 }
 
 export function addAnswer(answer){
-    console.log(answer.authedUser)
     return {
         type: ADD_ANSWER,
         id : answer.authedUser,

@@ -16,16 +16,13 @@ const withRouter = (Component) => {
 const QuestionPage = (props) => {
 
     const handleClick = (event) => {
-        //dispatch answer
         const answer = { 
             authedUser: props.authedUser,
             qid: props.id,
             answer: event.target.value
         }
         props.dispatch(handleSaveAnswer(answer))
-        
-        //return to home
-        //props.navigate("/")
+
     }
 
     return (

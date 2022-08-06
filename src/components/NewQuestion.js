@@ -26,7 +26,6 @@ const NewQuestion = (props) => {
         }
         props.dispatch(handleSaveQuestion(newQuestion))
         navigate("/")
-        //TODO - return to home page
 
     }
 

@@ -33,7 +33,6 @@ export default function questions(state = {} , action){
                         votes: [...optionTwoVotes.filter(id => id !== authedUser), ... answer === 'optionTwo' ? [authedUser] : [] ]
                     } 
                 }
-                //add question to auth user solved questions
             }
         default:
             return state

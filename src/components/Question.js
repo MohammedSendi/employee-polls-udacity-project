@@ -6,10 +6,6 @@ const Question = (props) => {
 
     const navigate = useNavigate()
 
-    const handleClick = (event) => {
-        const id = event.target.value
-        navigate("QuesionPage/" + id)
-    }
     return (
         <div>
             <h1>{props.author}</h1>

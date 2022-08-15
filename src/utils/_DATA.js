@@ -39,7 +39,7 @@ let users = {
       id: 'zoshikanlu',
       password:'pass246',
       name: 'Zenobia Oshikanlu',
-      avatarURL: null,
+      avatarURL: 'https://w7.pngwing.com/pngs/193/660/png-transparent-computer-icons-woman-avatar-avatar-girl.png',
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
       },

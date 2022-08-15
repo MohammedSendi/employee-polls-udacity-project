@@ -1,6 +1,15 @@
 import { connect } from "react-redux";
 import {handleSaveAnswer} from '../actions/questions'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { Avatar, CardActionArea } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
@@ -19,47 +28,76 @@ const QuestionPage = (props) => {
         const answer = { 
             authedUser: props.authedUser,
             qid: props.id,
-            answer: event.target.value
+            answer: event.currentTarget.value
         }
         props.dispatch(handleSaveAnswer(answer))
 
     }
 
     return (
-        <div>
-            {
-                props.error ? (
-                    <div>
-                        <h1>{props.error}</h1>
-                        <h3>Page not Found</h3>
-                    </div>
-                ) : (
-                <div>
-                    <h1>Poll by <span>{props.author}</span></h1>
-                    <h1>Would You Rather</h1>
-                    <div>
-                        <h4>{props.question.optionOne.text}</h4>
-                        <button value={'optionOne'} onClick={handleClick} disabled={props.optionOne}>Click</button>
-                        {props.answered && (
-                            <div>
-                                <p>{props.optionOneVotes}</p>
-                                <p>{props.optionOnePercentage}%</p>
-                            </div>
-                        )}
-                    </div>
-                    <div>
-                        <h4>{props.question.optionTwo.text}</h4>
-                        <button value={'optionTwo'} onClick={handleClick} disabled={props.optionTwo}>Click</button>
-                        {props.answered && (
-                            <div>
-                                <p>{props.optionTwoVotes}</p>
-                                <p>{props.optionTwoPercentage}%</p>
-                            </div>
-                        )}
-                    </div>
-                </div>) 
-            }
-        </div>
+        props.error ? (
+            <div>
+                <h1>{props.error}</h1>
+                <h3>Page not Found</h3>
+            </div>
+            ) : (
+            <Box sx={{ flexGrow: 1 }} >
+                <br/>
+                <Grid align='center'>
+                <Typography variant="h4" component="h5" color="text.primary" textAlign='center'>
+                    Poll by {props.author.name}
+                </Typography>
+                <br/>
+                <Avatar 
+                    alt={props.author.name}
+                    src={props.author.avatarURL ? props.author.avatarURL : "/"}
+                    sx={{ width: 400, height: 400 }}
+                    align='center'
+                />
+                <br/>
+                <Typography variant="h4" component="h5" color="text.primary" textAlign='center'>
+                    Would You Rather
+                </Typography>
+                <br/>
+                </Grid>
+                    <Grid alignItems="center" justifyContent="center" container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        <Grid item xs={6} >
+                            <Button variant="outlined" value={'optionOne'} onClick={handleClick} {...(props.optionOne? {color : "success", variant: "contained"} : {})}>
+                                <Typography gutterBottom variant="h5" component="div" color="text.primary" textAlign='center'>
+                                    {props.question.optionOne.text}
+                                </Typography>
+                            </Button>
+                            {
+                                props.answered && ( <>
+                                    <Typography color="text.primary" textAlign='center'>
+                                            number of votes: {props.optionOneVotes}
+                                    </Typography>
+                                    <Typography color="text.primary" textAlign='center'>
+                                            percentage: {props.optionOnePercentage}%
+                                    </Typography>
+                                </>)
+                            }
+                        </Grid>
+                    <Grid item xs={6}>
+                        <Button variant="outlined" value={'optionTwo'} onClick={handleClick} {...(props.optionTwo? {color : "success", variant: "contained"} : {})}>
+                            <Typography gutterBottom variant="h5" component="div" color="text.primary" textAlign='center'>
+                                {props.question.optionTwo.text}
+                            </Typography>
+                        </Button>
+                        {
+                            props.answered && ( <>
+                                <Typography color="text.primary" textAlign='center'>
+                                    number of votes: {props.optionTwoVotes}
+                                </Typography>
+                                <Typography color="text.primary" textAlign='center'>
+                                    percentage: {props.optionTwoPercentage}%
+                                </Typography>
+                            </>)
+                        }
+                    </Grid>
+                </Grid>
+            </Box>
+            )
     )
 }
 
@@ -79,7 +117,7 @@ const mapStateToProps = ({authedUser, users, questions}, props) => {
     return {
         authedUser,
         question,
-        author: users[question.author].name,
+        author: users[question.author],
         id,
         ...props.router,
         optionOne,

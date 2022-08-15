@@ -9,6 +9,18 @@ import QuesionPage from './QuesionPage'
 import Nav from './Nav'
 import Login from './Login'
 import {Routes, Route} from 'react-router-dom'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+
+
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+
+    
+  },
+});
 
 const App = (props) => {
 
@@ -17,20 +29,27 @@ const App = (props) => {
   }, [])
 
   return (
-  <Fragment>
-    <LoadingBar/>
-    {props.logged === true? <Login/> : (
-      <div>
-        <Nav/>
-        <Routes>
-          <Route path='/' exact element={<Home/>}/>
-          <Route path='/leaderboard' element={<Leaderboard/>}/>
-          <Route path='/new' element={<NewQuestion/>}/>
-          <Route path='/poll/:id' element={<QuesionPage/>}/>
-        </Routes>
-      </div>
-    )}
-  </Fragment>
+  <ThemeProvider theme={theme}>
+          <CssBaseline />
+
+    <Container>
+      <Fragment>
+        <LoadingBar/>
+        {props.logged === true? <Login/> : (
+          <div>
+            <Nav/>
+            <Routes>
+              <Route path='/' exact element={<Home/>}/>
+              <Route path='/leaderboard' element={<Leaderboard/>}/>
+              <Route path='/new' element={<NewQuestion/>}/>
+              <Route path='/poll/:id' element={<QuesionPage/>}/>
+            </Routes>
+          </div>
+        )}
+      </Fragment>
+    </Container>
+  </ThemeProvider>
+
 );
 }
 

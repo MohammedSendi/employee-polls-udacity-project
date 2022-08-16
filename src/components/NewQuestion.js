@@ -8,11 +8,13 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 const NewQuestion = (props) => {
 
     const navigate = useNavigate()
 
+    const [error, setError] = useState("")
     const [optionOne, setOptionOne] = useState("")
     const [optionTwo, setOptionTwo] = useState("")
 
@@ -24,6 +26,12 @@ const NewQuestion = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        if(optionOne === "" || optionTwo === ""){
+            setError("Please fill both option before submitting")
+            return
+        }
+        setError("")
         const newQuestion = {
             optionOneText: optionOne,
             optionTwoText: optionTwo, 
@@ -46,6 +54,7 @@ const NewQuestion = (props) => {
                     Create Your Own Poll
                 </Typography>
                 <br/>
+                {error !== "" && <Alert data-testid="error" severity="error">{error}</Alert>}
                 <Typography color="text.secondary" textAlign='center'>
                     First Option
                 </Typography>
@@ -56,7 +65,7 @@ const NewQuestion = (props) => {
                 </Typography>
                 <TextField fullWidth label="Option One" name="option-two" type={'text'} placeholder="Option Two" onChange={handleTextChange} />
                 <br/><br/>
-                <Button type="submit" variant="contained">Submit</Button>
+                <Button data-testid='submit-button' type="submit" variant="contained">Submit</Button>
             </Box>
         </form>
     )

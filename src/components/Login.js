@@ -6,12 +6,14 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 const Login = (props) => {
 
+    const [error, setError] = useState("")
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
-    const submitEnabled = props.loading || user === "" || pass === ""
+    const submitEnabled = props.loading
 
     const handleTextChange = (event) => {
         event.preventDefault()
@@ -21,6 +23,11 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        if(user === "" || pass === ""){
+            setError("please enter user name and password")
+            return
+        }
+        setError("")
         props.dispatch(handleLogin(user, pass))
     }
 
@@ -36,17 +43,18 @@ const Login = (props) => {
                     Log In
                 </Typography>
                 <br/>
+                {error !== "" && <Alert data-testid="error" severity="error">{error}</Alert>}
                 <Typography color="text.secondary" textAlign='center'>
                     User
                 </Typography>
-                <TextField fullWidth label="User" name="user" type={'text'} onChange={handleTextChange}/>
+                <TextField fullWidth label="User" name="user" id="user" type={'text'} onChange={handleTextChange}/>
                 <br/><br/>
                 <Typography color="text.secondary" textAlign='center'>
                     Password
                 </Typography>
-                <TextField fullWidth label="password" name="password" type={'password'} onChange={handleTextChange} />
+                <TextField fullWidth label="password" name="password" id="password" type={'password'} onChange={handleTextChange} />
                 <br/><br/>
-                <Button type="submit" disabled={submitEnabled} variant="contained">Log In</Button>
+                <Button data-testid='submit-button' type="submit" disabled={submitEnabled} variant="contained">Log In</Button>
             </Box>
         </form>
     )

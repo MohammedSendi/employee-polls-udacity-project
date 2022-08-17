@@ -18,13 +18,14 @@ export function checkUserCredenrials(username, password){
                     const user = users[username];
     
                     if (user.password !== password) {
-                        reject(alert('Wrong password.'));
+                        alert('Wrong password.')
+                        reject('Wrong password.');
                     }
     
                     return resolve(user);
                 }
-    
-                return reject(alert('User not found.'));
+                alert('User not found.')
+                return reject('User not found.');
             })
             
         }, 500)

@@ -37,14 +37,14 @@ const QuestionPage = (props) => {
     return (
         props.error ? (
             <div>
-                <h1>{props.error}</h1>
+                <h1 data-testid='error'>{props.error}</h1>
                 <h3>Page not Found</h3>
             </div>
             ) : (
             <Box sx={{ flexGrow: 1 }} >
                 <br/>
                 <Grid align='center'>
-                <Typography variant="h4" component="h5" color="text.primary" textAlign='center'>
+                <Typography data-testid='author' variant="h4" component="h5" color="text.primary" textAlign='center'>
                     Poll by {props.author.name}
                 </Typography>
                 <br/>
@@ -63,7 +63,7 @@ const QuestionPage = (props) => {
                     <Grid alignItems="center" justifyContent="center" container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         <Grid item xs={6} >
                             <Button variant="outlined" value={'optionOne'} onClick={handleClick} {...(props.optionOne? {color : "success", variant: "contained"} : {})}>
-                                <Typography gutterBottom variant="h5" component="div" color="text.primary" textAlign='center'>
+                                <Typography data-testid='option-one'  gutterBottom variant="h5" component="div" color="text.primary" textAlign='center'>
                                     {props.question.optionOne.text}
                                 </Typography>
                             </Button>
@@ -80,7 +80,7 @@ const QuestionPage = (props) => {
                         </Grid>
                     <Grid item xs={6}>
                         <Button variant="outlined" value={'optionTwo'} onClick={handleClick} {...(props.optionTwo? {color : "success", variant: "contained"} : {})}>
-                            <Typography gutterBottom variant="h5" component="div" color="text.primary" textAlign='center'>
+                            <Typography data-testid='option-two'  gutterBottom variant="h5" component="div" color="text.primary" textAlign='center'>
                                 {props.question.optionTwo.text}
                             </Typography>
                         </Button>

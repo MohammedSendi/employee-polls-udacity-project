@@ -13,7 +13,7 @@ const Question = (props) => {
     return (
       <Card >
         <CardActionArea>
-          <Link to={`/poll/${props.question.id}`} style={{ textDecoration: 'none' }}>
+          <Link to={`/questions/${props.question.id}`} style={{ textDecoration: 'none' }}>
           <CardContent >
             <Typography gutterBottom variant="h5" component="div" color="text.primary" textAlign='center'>
               {props.author}

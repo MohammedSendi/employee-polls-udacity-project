@@ -41,8 +41,8 @@ const App = (props) => {
             <Routes>
               <Route path='/' exact element={<Home/>}/>
               <Route path='/leaderboard' element={<Leaderboard/>}/>
-              <Route path='/new' element={<NewQuestion/>}/>
-              <Route path='/poll/:id' element={<QuesionPage/>}/>
+              <Route path='/add' element={<NewQuestion/>}/>
+              <Route path='/questions/:id' element={<QuesionPage/>}/>
             </Routes>
           </div>
         )}

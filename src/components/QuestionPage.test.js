@@ -13,14 +13,14 @@ import Home from './Home'
 describe('QuesionPage', () => {
     it('will display correct data if id is found', async () => {
 
-        const route = '/poll/xj352vofupe1dqz9emx13r'
+        const route = '/questions/xj352vofupe1dqz9emx13r'
         await store.dispatch(handleInitialData())
 
         var { getByTestId, queryByTestId } = render(
             <MemoryRouter initialEntries={[route]}>
                 <Provider store={store}>
                     <Routes>
-                        <Route path='/poll/:id' element={<QuesionPage/>}/>
+                        <Route path='/questions/:id' element={<QuesionPage/>}/>
                     </Routes>
                 </Provider>
             </MemoryRouter>
@@ -37,14 +37,14 @@ describe('QuesionPage', () => {
 describe('QuesionPage', () => {
     it('will display 404 message if id not found', async () => {
 
-        const route = '/poll/undefined-id'
+        const route = '/questions/undefined-id'
         await store.dispatch(handleInitialData())
 
         var { getByTestId, queryByTestId } = render(
             <MemoryRouter initialEntries={[route]}>
                 <Provider store={store}>
                     <Routes>
-                        <Route path='/poll/:id' element={<QuesionPage/>}/>
+                        <Route path='/questions/:id' element={<QuesionPage/>}/>
                     </Routes>
                 </Provider>
             </MemoryRouter>

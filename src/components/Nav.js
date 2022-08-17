@@ -18,7 +18,7 @@ const Nav = (props) => {
     const handleLogout = () => {
         props.dispatch(logoutUser())
     }
-    const pages = {Home : '/', Leaderboard : '/leaderboard', New :'/new'};
+    const pages = {Home : '/', Leaderboard : '/leaderboard', Add :'/add'};
     const settings = {Logout : handleLogout};
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
